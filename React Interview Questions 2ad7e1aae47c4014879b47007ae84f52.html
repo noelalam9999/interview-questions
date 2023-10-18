@@ -1,0 +1,694 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>React Interview Questions</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2ad7e1aa-e47c-4014-879b-47007ae84f52" class="page sans"><header><h1 class="page-title">React Interview Questions</h1><p class="page-description"></p></header><div class="page-body"><p id="4211bf4b-6b68-4551-9eac-824608a21e8f" class=""><strong>What is Hoisting</strong></p><p id="4d335151-5a03-4c87-b225-11e86e0a62de" class="">Hoisting is when the compiler loads the declaration of the variables and functions first then compiles the logic. So any var or func that gets declared at the bottom can still be used at the top. <div class="indented"><p id="c01d9b6a-efbb-431c-a65b-6a9728bcec1b" class="">Followup Question </p><p id="b2ed6991-7dfc-4b09-a2b8-f239e62d0591" class="">Does it actually move the variable or does it appear to have moved</p></div></p><p id="cf08bd25-6961-4fab-8020-cbdcee0d08b5" class=""><strong>What is Closure? </strong></p><p id="5239062e-348a-4072-a3e2-88eb2ad60121" class="">Say the english meaning of closure. </p><p id="ba5e579a-fb67-4dce-b4e5-49dc71a32375" class="">Closure is when we return a function from inside another function and use the variables inside the scope of the outer function to store value. So for eg if we have a function called Count that has a variable called counter and returned function called increment. Every time we call the instance of count ie increment we will be increasing the counter variable. </p><p id="50c8afc5-c046-49c0-bb83-3d30b372a8e3" class="">A practical example of this can be seen in react hooks</p><p id="66d90275-cc7c-4363-a03d-840c1df052aa" class=""><strong>What is currying </strong></p><p id="5a50b6a4-f7b3-4cb5-a855-a1aca38bef48" class="">curryFunction(1)(2)(3)</p><p id="13f8a8f5-6ebb-4a33-9429-2ce6eb084394" class=""><strong>What are pure components in react?</strong></p><p id="b227f01c-b496-4fa7-ae75-ac05c7995648" class=""><a href="https://blog.logrocket.com/what-are-react-pure-functional-components/">https://blog.logrocket.com/what-are-react-pure-functional-components/</a></p><p id="91c36861-48ee-4df4-9a46-f52265564752" class="">Components that dont rerender unnecessarily are called pure Component. </p><p id="7c0c04c1-9680-4ae6-a213-f42b17b5cea6" class="">Class based components have the luxury of using React.PureComponent class to make themselves pure. But functional components need to be placed inside Higher Order Components to reap the benefits of purity. <div class="indented"><p id="67ad6c60-a03f-46aa-8683-e80861fef70c" class="">Follow up </p><p id="3bf9f735-5866-4029-bdd0-b9a386069356" class="">Will a pure function rerender if the same object is passed? </p><p id="d3da551d-3cd2-4a58-a9ed-ce66a126d71d" class="">Yes. in case of non-composite data types we need to memoize the component</p><p id="3e1e87db-6257-472a-a996-204ffd96d408" class="">
+</p></div></p><p id="51469f21-9a4f-4763-b4ee-65df03b846de" class=""><strong>What are Higher Order Functions</strong></p><p id="357c7938-b146-4255-b584-c2d5bab9bd60" class="">Functions that return other functions</p><p id="100e3484-f942-4c86-ba55-370ea056160c" class=""><strong>What is Component Composition in react</strong></p><p id="407d3754-ccd3-4558-a5db-806d92c9cd2f" class="">When one component takes another component as props</p><p id="eb6d5b38-1bc0-4bd9-9bd3-d77683cb8285" class="">Eg - layout components taking in pages components</p><p id="8fbd845c-8822-49be-a471-ba2775a42f63" class="">
+</p><p id="7cbc2d11-f60f-4622-bc4b-92fe127d0012" class=""><strong>Explain Virtual DOM</strong></p><p id="5aa123c2-62fe-47d8-83bb-408203d419ef" class="">
+</p><p id="4d07f657-a85b-4335-b125-eb463f8df5cf" class=""><strong><strong>Explain the standard JavaScript toolchain, transpilation (via Babel or other compilers), JSX, and these items’ significance in recent development. What sort of tools might you use in the build steps to optimize the compiled output React code?</strong></strong></p><p id="8803112f-5945-4bc3-91cf-29534ffdcddd" class=""><a href="https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Introducing_complete_toolchain">https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Introducing_complete_toolchain</a></p><p id="9bf58db6-416e-4263-ba70-76988fa63b88" class="">
+</p><p id="468f7853-5707-4cf2-b0d4-3561d53d0dfd" class=""><strong><strong>What is the significance of keys in React?</strong></strong></p><p id="51e75a38-c944-4040-aee5-b218db8c2386" class=""><a href="https://www.toptal.com/react/interview-questions">https://www.toptal.com/react/interview-questions</a></p><p id="8259525d-6b73-406a-a106-293e33872e29" class="">
+</p><p id="220bb29a-9c81-4496-a8a4-0dd8ec88bd91" class=""><strong><strong>What is the significance of refs in React?</strong></strong></p><p id="2ecf10bf-b849-4716-a47a-e644030712eb" class="">
+</p><p id="800f9085-bd5a-4b1e-9913-94145477cfa2" class=""><strong><strong>Explain the positives and negatives of shallow rendering components in tests.</strong></strong></p><p id="1c3e36d6-9556-4c71-82b1-9caf0570f870" class=""><a href="https://legacy.reactjs.org/docs/shallow-renderer.html#:~:text=Shallow%20rendering%20lets%20you%20render,does%20not%20require%20a%20DOM">https://legacy.reactjs.org/docs/shallow-renderer.html#:~:text=Shallow rendering lets you render,does not require a DOM</a>.</p><p id="57fe91bf-1b11-4ed2-a1e5-fffffee07f34" class="">
+</p><p id="f690bba8-f9ae-413a-a03f-41f894d9a25b" class=""><strong><strong>If you wanted a component to perform an action only once when the component initially rendered—e.g., make a web analytics call—how would you achieve this with a class component? And how would you achieve it with a function component?</strong></strong></p><p id="4eb289ab-caa3-4045-8e92-e9523bd02210" class="">ComponentDidMount vs UseEffect</p><p id="a4ff9133-3771-4066-8db0-6187736dc085" class="">
+</p><p id="5d768c5c-aba8-445c-96cd-04d907eb24a7" class=""><strong><strong>If you were working on a React application that was rendering a page very slowly, how would you go about investigating and fixing the issue?</strong></strong></p><p id="871e9eb3-cf31-459e-856a-ae098a768be0" class="">Use the profiler tool. </p><p id="1718bf4a-e863-45e1-bd3b-78390187e6b5" class="">UseMemo hook and React.PureComponent are some common ways to solve the problem</p><p id="1749bc6f-3667-4785-b450-567ec3dc89b6" class="">
+</p><p id="566fb504-9837-4ca1-a7e2-c2a60525ed89" class=""><strong><strong>At a high level, what is the virtual DOM (VDOM) and how does React use it to render to the DOM?</strong></strong></p><p id="c682e9b5-df04-48d0-8480-1c3d81460da4" class="">The VDOM is a programming concept, providing a critical part of the React architecture. Rather than interacting directly with the DOM, changes are instead first rendered to the VDOM—a lightweight representation of the target state of the DOM.</p><p id="08f8c24a-713e-4c90-b828-5f0705a5a9e8" class="">Changes made to the VDOM are batched together to avoid unnecessary frequent changes to the DOM. Each time these batched changes are persisted to the DOM, React creates a diff between the current representation and the previous representation persisted to the DOM, then applies the diff to the DOM.</p><p id="4698b5bf-5c05-43a9-854f-2a96378fb5e3" class="">This abstraction layer for the DOM provides a simple interface for developers while allowing React to update the DOM in an efficient and performant manner.</p><p id="017b6c25-9abd-480f-a79b-0eb3cc7bb49f" class="">
+</p><p id="06e85271-eb20-44ab-a776-4a1ac79879f8" class=""><strong><strong>What is prop drilling and how can you avoid it?</strong></strong></p><p id="b30f2f06-81e9-4582-9347-ea7c34a2025e" class="">Context hook and redux</p><p id="fcd443e1-6f97-47ef-803d-2085c8ac15c4" class="">
+</p><p id="e2dd6f48-7aec-45ba-a35e-5fadc1505444" class=""><strong><strong>What is the </strong></strong><code>StrictMode</code><strong><strong>
+ component and why would you use it?</strong></strong></p><p id="2a8cc8d9-d327-4153-87b7-d8cb1d41af36" class=""><code>&lt;StrictMode /&gt;</code> is a component included with React to provide additional visibility of potential issues in components. If the application is running in development mode, any issues are logged to the development console, but these warnings are not shown if the application is running in production mode.</p><p id="ced2d653-4848-4210-b81b-c1dbf03d4ddb" class="">Developers use <code>&lt;StrictMode /&gt;</code> to find problems such as deprecated lifecycle methods and legacy patterns, to ensure that all React components follow current best practices.</p><p id="87f66a7f-1da8-4a8b-92ac-ea0abd0f161a" class=""><code>&lt;StrictMode /&gt;</code> can be applied at any level of an application component hierarchy, which allows it to be adopted incrementally within a codebase.</p><p id="11c17ae1-4188-43e4-845e-3fedbd9680c6" class="">
+</p><p id="d2e4e1e6-7e49-47ed-b226-99f91faf11cc" class=""><strong><strong>What is the key architectural difference between a JavaScript library such as React and a JavaScript framework such as Angular? How would that impact the decision for a project to use one versus the other?</strong></strong></p><p id="7ccf9821-e4cf-451f-bbaa-8056cab4fbc4" class="">React can be used if faster evolution is necessary</p><p id="0ee44be6-20b9-4ec5-bc57-358414c58e21" class="">Angular is more opinionated. Which means it will not just allow you to do certain things </p><p id="6d8598cb-f50c-4411-8a0c-c025e90fae51" class="">
+</p><p id="767a054c-a447-4b0c-8d66-651cf80c20a0" class=""><strong>What are some tools to improve a11y in react</strong></p><p id="134d3626-f727-4ee0-968d-2155f0cbca72" class="">eslint-plugin-jsx-a11y</p><p id="e29fd8c9-4726-48c6-958b-f648a026da59" class="">aXe and Google Lighthouse</p><p id="0189f4c3-2347-40fd-9863-c6a8f3dcde9a" class="">
+</p><p id="40624d08-67be-4c57-8ec4-6488b86353a7" class=""><strong><strong>How might React handle or restrict Props to certain types, or require certain Props to exist?</strong></strong></p><p id="9ed05b1f-0839-4c7c-99a7-cf0f707c0858" class="">PropTypes</p><p id="32c39060-a823-4a90-9556-25d1eac20b2f" class=""><strong><strong>3. What components are stateless in React?</strong></strong></p><p id="72aa587c-cf8e-44b7-be2f-f0f4073df350" class="">Components that take in props</p><p id="e0459835-3fad-4a6c-9c1e-3b7822c4f7c1" class="">
+</p><p id="f3e18b39-3a55-41b0-8394-33d074f34995" class="">
+</p><p id="1e025e79-7d58-4644-bcf7-cd2cba69541e" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
